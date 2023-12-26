@@ -67,3 +67,15 @@ def translate_text_baidu(text, target_language):
     result = response.json()
     return result['trans_result'][0]['dst']
 
+
+def translate_text_deepl(text, target_language='ZH'):
+    auth_key = "YOUR_AUTH_KEY"
+    endpoint = 'https://api-free.deepl.com/v2/translate'
+    params = {
+        "auth_key": auth_key,
+        "target_lang": target_language,
+        "text": text,
+    }
+    response = requests.get(endpoint, params=params)
+    result = response.json()
+    return result.get('translations')[0].get('text')
